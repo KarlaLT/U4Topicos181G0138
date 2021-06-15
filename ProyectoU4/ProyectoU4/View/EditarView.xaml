@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoU4.View.EditarView">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="DimGray"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="10,2"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="DimGray"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="10,2"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BackgroundColor" Value="Thistle"/>
+            <Setter Property="TextColor" Value="DimGray"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="BorderColor" Value="PaleGreen"/>
+            <Setter Property="BorderWidth" Value="3"/>
+            <Setter Property="Margin" Value="10,3"/>
+            <Setter Property="WidthRequest" Value="180"/>
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout BackgroundColor="#B0E0E6">
+
+        <Label Margin="0" Text="Modificar cita"  FontSize="40" FontAttributes="Bold" Padding="10" TextColor="DimGray"
+              BackgroundColor="PaleGreen" ></Label>
+
+
+        <Image Source="iconocitashoy" HeightRequest="150" Margin="10,10,10,20"></Image>
+        <Label>Seleccione la fecha de su cita:</Label>
+        <DatePicker x:Name="fecha" MinimumDate="01/01/2021" Date="{Binding Cita.Fecha}"  Margin="10,2" FontSize="16" TextColor="DimGray" HorizontalOptions="FillAndExpand"></DatePicker>
+
+        <Label>Hora:</Label>
+        <Entry ReturnType="Next" Text="{Binding Cita.Hora}"></Entry>
+
+        <Label>Nombre del cliente:</Label>
+        <Entry ReturnType="Next" Text="{Binding Cita.Cliente}"></Entry>
+
+        <Label>Servicio dental que necesita:</Label>
+        <Entry ReturnType="Next" Text="{Binding Cita.Servicio}"></Entry>
+
+        <Label>Lugar:</Label>
+        <Entry ReturnType="Next" Text="{Binding Cita.Lugar}"></Entry>
+
+        <Label>Dentista:</Label>
+        <Entry ReturnType="Next" Text="{Binding Cita.Doctor}"></Entry>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Command="{Binding EditarCommand}" Text="&#10004; Guardar"></Button>
+            <Button Command="{Binding CancelarEdElCommand}" Text="&#10008; Cancelar"></Button>
+        </StackLayout>
+
+        <Label TextColor="Red" FontSize="12" HorizontalTextAlignment="Center" Text="{Binding Error}"></Label>
+    </StackLayout>
+</ContentPage>

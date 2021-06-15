@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProyectoU4.ViewModell"
+             x:Class="ProyectoU4.View.CitasView">
+    <ContentPage.BindingContext>
+        <vm:CitasViewModel x:Name="agenda"></vm:CitasViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style  TargetType="Label">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Margin" Value="10,2"/>
+            <Setter Property="TextColor" Value="DimGray"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout>
+                <!--Citas de hoy-->
+                <StackLayout Orientation="Horizontal" BackgroundColor="Thistle">
+                    <Image Grid.Column="0" Source="CALENDER" HeightRequest="60" Margin="10,2,5,2"></Image>
+
+                    <StackLayout>
+                        <Label Margin="0" Text="AGENDA" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="DimGray" FontSize="35" FontAttributes="Bold" Padding="10,2,10,0" 
+                   BackgroundColor="Thistle" >
+                        </Label>
+                        <Label Margin="0" Text="Doble tap en las citas para ver su información completa." 
+                                   HorizontalTextAlignment="Center" TextColor="DimGray" FontSize="14" 
+                                   FontAttributes="Bold" Padding="10,0,10,4"></Label>
+                    </StackLayout>
+                </StackLayout>
+
+
+
+                <Label Margin="0" Text="HOY" HorizontalTextAlignment="Center" TextColor="DimGray" FontSize="Title" FontAttributes="Bold" Padding="10" 
+                   BackgroundColor="Orange" >
+                </Label>
+
+                <CollectionView ItemsSource="{Binding CitasHoy}" HeightRequest="230" x:Name="list" BackgroundColor="#1000">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference agenda}, Path=CitaCommand}"
+                                                      CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="iconocitashoy" HeightRequest="30" Margin="10,2,5,2"></Image>
+                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                    <Label x:Name="fecha" VerticalOptions="Center" FontAttributes="bold" TextColor="Purple" Text="{Binding Fecha, StringFormat='{0:MMMM/dd/yyyy}'}">
+
+                                    </Label>
+
+                                    <Label x:Name="hora"  VerticalOptions="Center" FontAttributes="bold" TextColor="Purple" Text="{Binding Hora}"></Label>
+
+                                </StackLayout>
+                                <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Text="{Binding Cliente}" 
+                                   ></Label>
+                                <Image Grid.Column="2" Margin="0,5,20,0" Source="edit" HeightRequest="25">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference agenda}, Path=VerEditarCommand}" CommandParameter="{Binding .}"
+                                      ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+            <Image Source="FONDO" Grid.Row="1" Opacity=".2"></Image>
+            <StackLayout Grid.Row="1">
+                <!--Citas de mes-->
+                <Label Margin="1" Text="OTRAS" HorizontalTextAlignment="Center" TextColor="DimGray" FontSize="Title" FontAttributes="Bold" Padding="10" 
+                   BackgroundColor="PaleGreen" ></Label>
+                <CollectionView ItemsSource="{Binding CitasREST}" HeightRequest="350" BackgroundColor="#1000">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid >
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference agenda}, Path=CitaCommand}"
+                                                      CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="iconocitashoy" HeightRequest="30" Margin="10,2,5,2"></Image>
+                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                    <Label  VerticalOptions="Center" FontAttributes="bold" TextColor="Purple" Text="{Binding Fecha, StringFormat='{0:dd/MMMM/yyyy}'}">
+
+                                    </Label>
+
+                                    <Label  VerticalOptions="Center" FontAttributes="bold" TextColor="Purple" Text="{Binding Hora}">
+
+                                    </Label>
+
+                                </StackLayout>
+                                <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Text="{Binding Cliente}" 
+                                   ></Label>
+                                <Image Grid.Column="2" Margin="0,5,20,0" Source="edit" HeightRequest="25">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference agenda}, Path=VerEditarCommand}" CommandParameter="{Binding .}"
+                                      ></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <!--Citas de viejas-->
+            <StackLayout Grid.Row="2">
+                <Label Margin="1" Text="PASADAS" HorizontalTextAlignment="Center" TextColor="DimGray" FontSize="Title" FontAttributes="Bold" Padding="10" 
+                   BackgroundColor="PeachPuff" ></Label>
+                <CollectionView ItemsSource="{Binding CitasOld}" HeightRequest="410" BackgroundColor="#1000">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid >
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="listo" HeightRequest="20" Margin="10,2,5,2"></Image>
+                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                    <Label  VerticalOptions="Center" FontAttributes="bold" TextColor="Purple" >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span TextDecorations="Strikethrough" Text="{Binding Fecha, StringFormat='{0:dd/MMMM/yyyy}'}"></Span>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label  VerticalOptions="Center" FontAttributes="bold" TextColor="Purple" >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span TextDecorations="Strikethrough" Text="{Binding Hora}"></Span>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                </StackLayout>
+                                <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Text="{Binding Cliente}" 
+                                   ></Label>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+            <!--<Label Grid.Row="2" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" BackgroundColor="Crimson" TextColor="White"  Padding="7">¡Cuidamos tu sonrisa y te cuidamos a ti!</Label>-->
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

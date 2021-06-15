@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProyectoU4.ViewModell"
+             x:Class="ProyectoU4.View.InicioView">
+    <ContentPage.BindingContext>
+        <vm:CitasViewModel></vm:CitasViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="30,10"/>
+            <Setter Property="HeightRequest" Value="80"/>
+            <Setter Property="Background" Value="#B0D0E6"/>
+            <Setter Property="BorderColor" Value="#800080"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextColor" Value="#800080"/>
+            <Setter Property="CornerRadius" Value="15"/>
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Label Text="Consultorio dental KALU" FontSize="40" HorizontalTextAlignment="Center" BackgroundColor="#800080"
+              TextColor="White" FontAttributes="Bold" Padding="10" Margin="0,0,0,40"></Label>
+        <Image Source="iniciodent2"></Image>
+
+        <Button Command="{Binding VerAgregarCommand}" Text="Registrar cita"></Button>
+        <Button Command="{Binding VerCitasCommand}" Text="Ver agenda"></Button>
+
+        <Label Text="Atención de primera, ¡sonrisa de primera!" HorizontalTextAlignment="Center" TextColor="White" FontSize="23"
+               Margin="0,10"></Label>
+        <Label Text="Karla Verónica López Tovar" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Margin="0,50,0,0"></Label>
+    </StackLayout>
+</ContentPage>
